@@ -1,0 +1,7 @@
+.ipynb_checkpoints
+data
+datasets
+raw_data
+best_seg.pt
+datasets.zip
+test_image.jpg
