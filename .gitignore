@@ -2,6 +2,6 @@
 data
 datasets
 raw_data
-best_seg.pt
-datasets.zip
 test_image.jpg
+label-studio-data.zip
+runs
