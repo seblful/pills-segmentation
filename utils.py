@@ -235,7 +235,7 @@ def visualize_augmentation(image_array, original_polygons, images_aug,  polygons
 
         # Counting
         counter += 1
-        print(f"Visualization stage {str(counter)} of {str(len(images_aug))} has completed")
+        print(f"Visualization stage {str(counter)} of {str(len(images_aug))} has completed.")
 
     # Convert cells to a grid image and save.
     grid_image = ia.draw_grid(cells, cols=4)

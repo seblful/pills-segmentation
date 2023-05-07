@@ -35,8 +35,8 @@ parser.add_argument("--check_labels",
 
 # Get an arg for number_images_for_check
 parser.add_argument("--number_images_for_check", 
-                     default=5, 
-                     type=bool, 
+                     default=5,
+                     type=int,
                      help="How many images should check after augmentation. Works only if check_labels==True.")
 
 
