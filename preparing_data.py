@@ -1,8 +1,54 @@
+# preparing_data.py
 from utils import augment_images_and_labels, check_if_labels_right,\
                   partitionate_data, create_data_yaml
 
 import os
 import imgaug.augmenters as iaa
+import argparse
+
+# Create a parser
+parser = argparse.ArgumentParser(description="Get some hyperparameters.")
+
+# Get an arg for factor_tablets
+parser.add_argument("--factor_tablets", 
+                     default=3, 
+                     type=int, 
+                     help="Factor how many images with tablets should be after augmentation.")
+
+# Get an arg for factor_capsules
+parser.add_argument("--factor_capsules", 
+                     default=3, 
+                     type=int, 
+                     help="Factor how many images with capsules should be after augmentation.")
+
+# Get an arg for vizualize_augmentation
+parser.add_argument("--vizualize_augmentation", 
+                     default=True, 
+                     type=bool, 
+                     help="Vizualize how image is changing after several step of augmentation.")
+
+# Get an arg for check_labels
+parser.add_argument("--check_labels", 
+                     default=True, 
+                     type=bool, 
+                     help="Vizualize if polygon is right after augmentation on several random images.")
+
+# Get an arg for number_images_for_check
+parser.add_argument("--number_images_for_check", 
+                     default=5, 
+                     type=bool, 
+                     help="How many images should check after augmentation. Works only if check_labels==True.")
+
+
+# Get our arguments from the parser
+args = parser.parse_args()
+
+# Setup hyperparameters
+FACTOR_TABLETS = args.factor_tablets
+FACTOR_CAPSULES = args.factor_capsules
+VIZUALIZE_AUGMENTATION = args.vizualize_augmentation
+CHECK_LABELS = args.check_labels
+NUMBER_IMAGES_FOR_CHECK = args.number_images_for_check
 
 
 def main():
@@ -42,12 +88,17 @@ def main():
 
 
     # Augmenting and save images and labels
-    augment_images_and_labels(RAW_DATA_PATH, DATA_PATH, augmenter, augmented_factor_tablets=3, augmented_factor_capsules=5, visualize=True)
+    augment_images_and_labels(RAW_DATA_PATH, 
+                              DATA_PATH, 
+                              augmenter, 
+                              augmented_factor_tablets=FACTOR_TABLETS, 
+                              augmented_factor_capsules=FACTOR_CAPSULES, 
+                              visualize=VIZUALIZE_AUGMENTATION)
     print("Images has augmented.")
-
-    # Check if labels after augmentation is right
-    check_if_labels_right(DATA_PATH, number_of_images=8)
-    print("Labels has checked, see image 'check_augmented_polygons.jpg' in directory.")
+    if CHECK_LABELS==True:
+        # Check if labels after augmentation is right
+        check_if_labels_right(DATA_PATH, number_of_images=NUMBER_IMAGES_FOR_CHECK)
+        print("Labels has checked, see image 'check_augmented_polygons.jpg' in directory.")
 
     # Create train, validation and test data and put them to dataset folder
     partitionate_data(DATA_PATH, DATASET_PATH, train_size=0.75)
