@@ -1,8 +1,20 @@
+# Cache
 .ipynb_checkpoints
 __pycache__
+
+# Data
+raw_data
 data
 datasets
-raw_data
+runs
 test_image.jpg
 label-studio-data.zip
-runs
+
+# Models
+yolov8n.pt
+yolov8s-seg.pt
+yolov8m-seg.pt
+yolov8l-seg.pt
+
+# Notebook
+yolo_training_from_label_studio_data.ipynb
