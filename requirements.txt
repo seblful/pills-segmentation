@@ -1,0 +1,8 @@
+imgaug==0.4.0
+imageio==2.27.0
+opencv-python==4.7.0.72
+tqdm==4.65.0
+ultralytics==8.0.58
+torch==2.0.0
+torchaudio==2.0.0
+torchvision==0.15.0
